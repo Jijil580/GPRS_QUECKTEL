@@ -315,8 +315,10 @@ extern uint8_t MODULE_FEEDBACK[200];
 extern int FEEDBACK_LENGTHG;
 extern uint8_t UART0_RECIEVED_DATA[200];
 extern  uint8_t RX0_BUFFER[200];
+extern uint8_t RX1_BUFFER[200];
 extern uint8_t RX0_RECIEVED_STRING_LENGTH;
 extern uint8_t COMPARE_BUFF[200];
+extern uint8_t RX1_BUFFER_COUNT;
 /***********************************************************************************************************************
 Global functions
 ***********************************************************************************************************************/

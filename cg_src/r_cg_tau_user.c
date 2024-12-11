@@ -41,7 +41,13 @@ Pragma directive
 #pragma interrupt r_tau0_channel0_interrupt(vect=INTTM00)
 /* Start user code for pragma. Do not edit comment generated here */
 /* End user code. Do not edit comment generated here */
+<<<<<<< Updated upstream
 
+=======
+uint8_t DATA_RECIEVED=0;
+uint8_t TCP_INIT_STATUS;
+//uint8_t METER_DATA=0;
+>>>>>>> Stashed changes
 /***********************************************************************************************************************
 Global variables and functions
 ***********************************************************************************************************************/
@@ -57,8 +63,39 @@ Global variables and functions
 static void __near r_tau0_channel0_interrupt(void)
 {
     /* Start user code. Do not edit comment generated here */
+<<<<<<< Updated upstream
     
    TIMER_COUNT++;
+=======
+     //R_WDT_Restart();  
+      TIMER_COUNT++;
+      R_WDT_Restart();
+      if(TIMER_COUNT>=1&&TCP_INIT_STATUS==0)///INITIALISING MODULE
+	  {
+           TIMER_COUNT=0;
+	   DATA_RECIEVED=1;
+	   R_TAU0_Channel0_Stop();
+	  
+	   }
+       if(TIMER_COUNT>=3&&TCP_INIT_STATUS==1&&METER_DATA==0)///TCP DATA RECVD
+	  {
+           TCP_DATA=1;
+           TIMER_COUNT=0;
+	   DATA_RECIEVED=1;
+	   R_TAU0_Channel0_Stop();
+	   }
+	  if(TIMER_COUNT>=3&&TCP_INIT_STATUS==1&&METER_DATA==1)///DATA FROM METER RECVD
+	  {
+           TCP_DATA=0;
+           TIMER_COUNT=0;
+	   DATA_RECIEVED=1;
+	   R_TAU0_Channel0_Stop();
+	   
+	   }
+	  
+	  
+     R_WDT_Restart();
+>>>>>>> Stashed changes
     
     /* End user code. Do not edit comment generated here */
 }

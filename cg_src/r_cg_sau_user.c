@@ -72,10 +72,10 @@ extern volatile uint16_t  g_uart1_rx_length;           /* uart1 receive data len
  uint8_t RX0_RECIEVED_STRING_LENGTH;
  uint8_t RX0_BUFFER[200];
  uint8_t TX0_BUFFER[100];
- uint8_t RX1_BUFFER[100];
+ uint8_t RX1_BUFFER[200];
  uint8_t TX1_BUFFER[500];
  extern uint8_t URC_BUFFER[100];
- 
+ uint8_t METER_DATA=0;
  int  RX0_BUFFER_COUNT=0;
  uint8_t TX0_BUFFER_COUNT=0;
  uint8_t RX1_BUFFER_COUNT=0;
@@ -212,6 +212,69 @@ static void __near r_uart0_interrupt_receive(void)
         r_uart0_callback_softwareoverrun(rx_data);
     }
 }
+<<<<<<< Updated upstream
+=======
+*/
+
+static void __near r_uart0_interrupt_receive(void)
+{
+  
+ 
+	  
+   volatile uint8_t rx_data;
+   volatile uint8_t err_type;
+ 
+ 
+    
+    err_type = (uint8_t)(SSR01 & 0x0007U);
+    SIR01 = (uint16_t)err_type;
+
+    if (err_type != 0U)
+      {
+        r_uart0_callback_error(err_type);
+      }
+    
+    rx_data = RXD0;
+  
+    if ( rx_data>=32&& rx_data<=126|| rx_data=='\r'|| rx_data=='\n')
+       {
+	       if(TIMER_COUNT==0)
+	       {
+		  R_TAU0_Channel0_Start();
+		  METER_DATA=0;
+	       }
+
+        if (RX0_BUFFER_COUNT < 200- 1 && MAIN_RX_STORE_COUNT < 1000 - 1) // Ensure we don't overflow
+             	{
+            		RX0_BUFFER[RX0_BUFFER_COUNT]= rx_data;
+	      		//MAIN_RX_STORE[MAIN_RX_STORE_COUNT]=rx_data;
+	   		RX0_BUFFER_COUNT++;
+	   		//MAIN_RX_STORE_COUNT++;
+	   	}
+     
+	
+	
+        }
+    
+      
+    
+   
+  }
+  
+  //cr_uart0_callback_receiveend();
+//          UART0_RECIEVED_DATA[ g_uart0_rx_count]='\0';
+//          RX0_BUFFER[RX0_BUFFER_COUNT]='\0';
+//	  strcpy((char*)COMPARE_BUFF,(char*)RX0_BUFFER);
+//	  RX0_RECIEVED_STRING_LENGTH=RX0_BUFFER_COUNT;
+//	  Compare_response();
+//          r_uart0_callback_receiveend();
+//	  R_TAU0_Channel0_Stop();
+//          TIMER_COUNT=0;
+//}
+
+
+
+>>>>>>> Stashed changes
 /***********************************************************************************************************************
 * Function Name: r_uart0_interrupt_send
 * Description  : None
@@ -229,7 +292,7 @@ static void __near r_uart0_interrupt_send(void)
     else
     {
 	//memset(UART1_RECIEVED_DATA,0,100);
-	memset(RX1_BUFFER,0,100);
+	memset(RX1_BUFFER,0,200);
 	memset(MAIN_RX_STORE,0,200);
 	memset(final_buffer,0,200);
 	RX1_BUFFER_COUNT=0;
@@ -313,7 +376,12 @@ static void __near r_uart1_interrupt_receive(void)
  
    if ( rx_data>=32&& rx_data<=126|| rx_data=='\r'|| rx_data=='\n')
     {
-	    
+	if(TIMER_COUNT==0)
+	   {
+            R_TAU0_Channel0_Start(); 
+	     METER_DATA=1;
+	    }
+
 	    
 	if (RX1_BUFFER_COUNT < 100- 1 && MAIN_RX_STORE_COUNT < 100 - 1) // Ensure we don't overflow
          {
@@ -321,11 +389,13 @@ static void __near r_uart1_interrupt_receive(void)
      
 	  RX1_BUFFER[RX1_BUFFER_COUNT]= rx_data;
 	 // MAIN_RX_STORE[MAIN_RX_STORE_COUNT]=rx_data;
-	  RX1_BUFFER_COUNT++;
-	  MAIN_RX_STORE_COUNT++;
+	   RX1_BUFFER_COUNT++;
+	   MAIN_RX_STORE_COUNT++;
 	
 	   }
-        if (rx_data == '\n')
+    }
+ /* 
+ if (rx_data == '\n')
         {
             LINE_END_COUNT++;
            
@@ -348,7 +418,7 @@ static void __near r_uart1_interrupt_receive(void)
          RX1_BUFFER[RX1_BUFFER_COUNT]='\0';
 	 
 	 
-	 strcpy((char *)final_buffer, (char *)(RX1_BUFFER + 2));    
+	     
          r_uart1_callback_receiveend();
  
           END_OF_RESPONSE1 = 0;
@@ -358,6 +428,7 @@ static void __near r_uart1_interrupt_receive(void)
     {
         r_uart1_callback_softwareoverrun(rx_data);
     }
+    */
 }
 /***********************************************************************************************************************
 * Function Name: r_uart1_interrupt_send

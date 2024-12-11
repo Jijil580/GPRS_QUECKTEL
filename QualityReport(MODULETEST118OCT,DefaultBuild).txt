@@ -1,5 +1,9 @@
 QualityReport
+<<<<<<< Updated upstream
 28 November 2024 18:13:11
+=======
+11 December 2024 15:49:10
+>>>>>>> Stashed changes
 
 ------ Start build(MODULETEST118OCT, DefaultBuild) ------
 C:\Program Files (x86)\Renesas Electronics\CS+\CC\CC-RL\V1.14.00\Bin\ccrl.exe cg_src\r_cg_sau_user.c -cpu=S3 -o DefaultBuild\r_cg_sau_user.obj "-dev=C:\Program Files (x86)\Renesas Electronics\CS+\CC\Device\RL78\Devicefile\DR5F10NLE.DVF" -g -g_line -I cg_src -I . -c -msg_lang=english
@@ -52,8 +56,13 @@ DefaultBuild\MODULETEST118OCT.clnk :
 
 
 --- SHA1 hash value of output files ---
+<<<<<<< Updated upstream
 D:\JIJIL EPPL\PROJECTS\EPPEL_GPRS-_MODULE\MODULETEST118OCT\DefaultBuild\MODULETEST118OCT.abs: 5211e11328bc1f8890d33d27a245e811c3ff3b10
 D:\JIJIL EPPL\PROJECTS\EPPEL_GPRS-_MODULE\MODULETEST118OCT\DefaultBuild\MODULETEST118OCT.mot: adbdde7444920959ec0475064f08dcb7d4b3133b
+=======
+D:\JIJIL EPPL\PROJECTS\METER_MODULE\GPRS_MODULE_FIRMWARE\DefaultBuild\MODULETEST118OCT.abs: ac6997697ac687108e31e7158b5abc0714cc95ff
+D:\JIJIL EPPL\PROJECTS\METER_MODULE\GPRS_MODULE_FIRMWARE\DefaultBuild\MODULETEST118OCT.mot: fce787b5508ecebdaa9cfd718cc5b56f4670850a
+>>>>>>> Stashed changes
 
 
 --- System Information ---
@@ -79,6 +88,7 @@ D:\JIJIL EPPL\PROJECTS\EPPEL_GPRS-_MODULE\MODULETEST118OCT\DefaultBuild\MODULETE
  C:\Program Files (x86)\Renesas Electronics\CS+\CC
 *Memory Usage
  *Private Working Set
+<<<<<<< Updated upstream
   739 MB
  *Number of GDI Objects
   2688
@@ -86,6 +96,15 @@ D:\JIJIL EPPL\PROJECTS\EPPEL_GPRS-_MODULE\MODULETEST118OCT\DefaultBuild\MODULETE
   1711
  *Opened Files
   24 editors, 24 files, 262 KB
+=======
+  533 MB
+ *Number of GDI Objects
+  2579
+ *Number of USER Objects
+  1604
+ *Opened Files
+  24 editors, 24 files, 272 KB
+>>>>>>> Stashed changes
 
 --- Build Tool Plug-in Information ---
 RH850 Build tool CC-RH Plug-in
